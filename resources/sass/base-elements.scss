@@ -1,0 +1,353 @@
+html, body {
+    height: 100%;
+}
+body {
+    font-family: "Montserrat";
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+
+    &.no_scroll {
+        overflow-y: hidden;
+    }
+}
+.body {
+    overflow-x: hidden;
+    height: 100vh;
+    margin-bottom: 60px;
+}
+*,
+::after,
+::before {
+    box-sizing: border-box
+}
+:focus {
+    outline: none;
+}
+html {
+    box-sizing: border-box;
+    -ms-overflow-style: scrollbar;
+    -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: transparent;
+}
+.h1, .h2, h1, h2 {
+    margin-bottom: .5rem;
+    margin-top: 0;
+    color: inherit;
+    display: inline-block;
+}
+.h1, h1 {
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.h2, h2 {
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+a {
+    color: #4f4f4f;
+    text-decoration: none;
+}
+a, .btn {
+    transition: all .2s;
+}
+a:hover,
+a:focus {
+    outline: none;
+    transition: all .2s;
+    color: #fff;
+    text-decoration: none;
+}
+p {
+    font-size: 14px;
+    line-height: 18px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+dl, ol, ul {
+    margin-top: 0;
+    padding: 0;
+}
+li {
+    display: inline-block;
+    list-style-type: none;
+    line-height: 17px;
+}
+img {
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    display: block;
+}
+button {
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 24px;
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+button:hover {
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+button:focus, input:focus, textarea:focus {
+    outline: none;
+}
+input, textarea {
+    -webkit-appearance: none !important;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+    -moz-appearance: number-input;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input, textarea {
+    font-family: "Montserrat";
+    font-size: 14px;
+    line-height: 20px;
+    border: 1px solid #7B7A7E;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+.form_group {
+    margin-bottom: 15px;
+    position: relative;
+}
+.form_control {
+    font-family: "Montserrat";
+    font-size: 14px;
+    line-height: 16px;
+    border: none;
+    border-bottom: 1px solid #737B84;
+    border-radius: 0;
+    padding: 10px 0;
+    width: 100%;
+}
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    position: relative;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.justify_align {
+    justify-content: space-between;
+    align-items: center;
+}
+.p_relative {
+    position: relative;
+}
+.btn {
+    background: #0088CC;
+    border-radius: 10px;
+}
+.btn_default {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    padding: 15px 20px;
+}
+
+.close_modal_icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 17px 20px;
+}
+.modal {
+    position: fixed;
+    z-index: 450;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+}
+.modal_overlay {
+    position: fixed;
+    z-index: 400;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(30, 36, 38, 0.5);
+
+}
+.show {
+    &.modal {
+        opacity: 1;
+        visibility: visible;
+        transition: all .3s;
+    }
+}
+
+
+.checkbox_data {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.checkbox, .radio_box {
+    display: none;
+}
+
+.checkbox_info {
+    line-height: 20px;
+    flex: 1 0;
+
+    a {
+        text-decoration-line: underline;
+        color: #0088CC;
+    }
+}
+
+.check_checkbox {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    border: 1px solid #DDDEDE;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.checkbox:checked + .check_checkbox {
+    background: #0088CC;
+    border-color: #0088CC;
+}
+.checkbox:checked + .check_checkbox:before {
+    content: url(/adminka/images/icons/icon-ok.svg);
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.btn_default_wrap {
+    position: fixed;
+    z-index: 5;
+    left: 15px;
+    bottom: 80px;
+    width: calc(100% - 30px);
+}
+.btn_default {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+    display: block;
+    padding: 9px;
+    border: 1px solid #0088CC;
+    border-radius: 5px;
+    background: #0088CC;
+
+    &-go {
+        color: #0088CC;
+        background: #fff;
+    }
+    &-value {
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 500;
+        margin-left: 10px;
+    }
+    &-disable {
+        background: #DDDEDE;
+        border-color: #DDDEDE;
+        cursor: no-drop;
+        pointer-events: none;
+    }
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+.mb-5 {
+    margin-bottom: 5px !important;
+}
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
+.hidden {
+    display: none;
+}
+
+.mx-auto {
+    margin: 0 auto;
+}
+
+.w-full {
+    width: 100%;
+}
+
+/**
+* TRANSITION-GROUP
+**/
+
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
