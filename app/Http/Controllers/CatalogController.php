@@ -13,5 +13,6 @@ class CatalogController extends BaseController
     }
     public function category(Request $request, $slug)
     {
+        echo $slug;
     }
 }

@@ -11,4 +11,9 @@ class ProductController extends BaseController
         $currentStore = $request->currentStore;
         return view('pages.product', compact('currentStore'));
     }
+
+    public function product(Request $request, $slug)
+    {
+        echo $slug;
+    }
 }

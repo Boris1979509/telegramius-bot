@@ -6,11 +6,13 @@
           <swiper-container class="swiper-{{ $product->id }}" loop="true" init="false">
             @foreach ($product->images as $image)
             <swiper-slide>
-              <img
-                class="slider__item-img"
-                src="{{ !empty($image->url) ? $image->url : Vite::asset('resources/images/no-image.jpg') }}"
-                alt="{{ $product->title }}"
-              />
+              <a href="{{ route('product', ['slug' => $product->slug]) }}">
+                <img
+                  class="slider__item-img"
+                  src="{{ !empty($image->url) ? $image->url : Vite::asset('resources/images/no-image.jpg') }}"
+                  alt="{{ $product->title }}"
+                />
+              </a>
             </swiper-slide>
             @endforeach
           </swiper-container>

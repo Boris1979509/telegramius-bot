@@ -15,11 +15,7 @@ class Search {
         this.myInput.addEventListener('input', this.handleInput.bind(this))
     }
     getImage (image) {
-        return image
-            ? import.meta.env.VITE_API_DOMAIN +
-                  '/storage/catalog/category/thumb/' +
-                  image
-            : noImageUrl
+        return image ? image : noImageUrl
     }
     handleInput (event) {
         const value = event.target.value
@@ -53,7 +49,6 @@ class Search {
                 categories.forEach(item => {
                     this.categoriesResultHtml += `
                                   <a href="${
-                                      import.meta.env.VITE_HOST +
                                       '/catalog/' +
                                       item.slug
                                   }" class="category ${
@@ -94,11 +89,16 @@ class Search {
                         setImage(item.images).forEach(img => {
                             this.productsResultHtml += `
                                                     <swiper-slide>
+                                                    <a href="${
+                                                        '/product/' +
+                                                        item.slug
+                                                    }">
                                                     <img
                                                         class="slider__item-img"
                                                         src="${img.url}"
                                                         alt=""
                                                     />
+                                                    </a>
                                                     </swiper-slide>`
                         })
                         this.productsResultHtml += `
