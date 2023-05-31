@@ -1,4 +1,4 @@
-<a href="{{ route('catalog', $category->slug) }}" class="category  {{ $currentStore->numProductsInRow === 1 ? 'item-one' : '' }}">
+<a href="{{ route('category', ['slug' => $category->slug]) }}" class="category  {{ $currentStore->numProductsInRow === 1 ? 'item-one' : '' }}">
     <img 
         src="{{ !empty($category->image) ? $category->image : Vite::asset('resources/images/no-image.jpg') }}" 
         alt="{{ $category->slug }}" class="category-img"
