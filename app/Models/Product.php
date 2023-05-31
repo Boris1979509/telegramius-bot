@@ -6,6 +6,7 @@ use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Schema;
 
 class Product extends Model
 {
@@ -105,5 +106,15 @@ class Product extends Model
         $formatter = new \NumberFormatter($this->getLocale(), \NumberFormatter::CURRENCY);
         $formattedCurrency = $formatter->formatCurrency($number, $this->currency);
         return  $formattedCurrency;
+    }
+
+    /**
+     * Проверяет, существует ли указанное поле в таблице
+     */
+    public static function hasColumn($fieldName)
+    {
+        $tableName = with(new static)->getTable();
+
+        return Schema::hasColumn($tableName, $fieldName);
     }
 }
