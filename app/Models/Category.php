@@ -7,13 +7,9 @@ use Illuminate\Support\Facades\Storage;
 
 class Category extends Model
 {
-    //use HasFactory;
-
-    // protected $guarded = [];
-    // protected $casts = [
-    //     'is_published' => 'boolean',
-    //     'is_visible_name' => 'boolean'
-    // ];
+    protected $casts = [
+        'is_visible_name' => 'boolean'
+    ];
 
     // public function products() {
     //     return $this->hasMany(Product::class);
@@ -24,13 +20,13 @@ class Category extends Model
     //     return $this->belongsTo(TeleShop::class, 'tele_shop_id', 'id');
     // }
 
-    // public function getPathImageAttribute()
-    // {
-    //     if ($this->image)
-    //         return url(Storage::url('catalog/category/thumb/' . $this->image));
-    //     else
-    //         return null;
-    // }
+    public function getImageAttribute($value)
+    {
+        if ($value)
+            return env('VITE_API_DOMAIN') . '/storage/catalog/category/thumb/' . $value;
+        else
+            return null;
+    }
 
     // public function products()
     // {

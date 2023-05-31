@@ -54,7 +54,7 @@ class Search {
                     this.categoriesResultHtml += `
                                   <a href="${
                                       import.meta.env.VITE_HOST +
-                                      '/category/' +
+                                      '/catalog/' +
                                       item.slug
                                   }" class="category ${
                         numCategoriesInRow === 1 ? 'item-one' : ''

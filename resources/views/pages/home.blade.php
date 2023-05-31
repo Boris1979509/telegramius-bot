@@ -8,7 +8,7 @@
   <h1 class="h1">@lang('common.home.title')</h1>
 </div>
 
-@foreach ($templates->template as $item)
+@foreach ($templates as $item)
   @if (isset($item['visible']) && $item['visible'] == 1)
     @include('partials.components.' . $item['name'], ['component' => $components->firstWhere('id', $item['id'])])
   @endif

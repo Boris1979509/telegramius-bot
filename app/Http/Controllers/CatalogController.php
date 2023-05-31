@@ -11,4 +11,7 @@ class CatalogController extends BaseController
         $currentStore = $request->currentStore;
         return view('pages.catalog', compact('currentStore'));
     }
+    public function category(Request $request, $slug)
+    {
+    }
 }

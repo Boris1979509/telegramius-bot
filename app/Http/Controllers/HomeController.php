@@ -21,6 +21,7 @@ class HomeController extends BaseController
             $item->categories = $item->categories()->orderByPivot('position', 'asc')->get();
             return $item;
         });
+        $templates = collect($templates->template)->sortBy('position'); // orders layout
         return view('pages.home', compact('currentStore', 'templates', 'components'));
     }
 

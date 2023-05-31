@@ -9,12 +9,12 @@
     @endforeach
   </div>
 </div>
-@else
+{{-- @else
 @component('partials.alert', ['type' => 'info', 'icon' => 'info', 'title' => __('common.information')])
   @slot('alert_text')
     @lang('common.noData')
   @endslot
-@endcomponent
+@endcomponent --}}
 @endif
 
 @push('scripts')
