@@ -72,7 +72,8 @@
         @if ($product->description)
           <div class="product_desc__wrap">
             <p class="full-text {{ $showFullText ? '' : 'show' }}">{{ $product->description }}</p>
-            <p class="short-text">{{ shortenText($product->description, $maxLength) }}</p>
+            <p class="short-text {{ $showFullText ? 'show' : '' }}">{{ shortenText($product->description, $maxLength) }}
+            </p>
             <span class="{{ !$showFullText ? 'hidden' : 'info-link' }}" id="toggle-button">
               @lang('common.toggleText.show')
             </span>

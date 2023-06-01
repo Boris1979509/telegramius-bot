@@ -446,10 +446,11 @@
     border-bottom: 1px solid #F1F3F5;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    .full-text {
+    .full-text, .short-text {
         display: none;
         &.show {
             display: block;
+            margin-bottom: 4px;
         }
     }
 }
