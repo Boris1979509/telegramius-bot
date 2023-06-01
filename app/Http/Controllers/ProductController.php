@@ -17,6 +17,12 @@ class ProductController extends BaseController
             }])
             ->first();
 
+        if ($product->arr_related) {
+            $related = explode(',', $product->arr_related);
+            $related_products = Product::whereIn('id', $related)->get();
+            $product->related_products = $related_products;
+        }
+
         return view('pages.product', compact('currentStore', 'product'));
     }
 }

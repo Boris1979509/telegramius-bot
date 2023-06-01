@@ -45,7 +45,7 @@
 </div>
 @push('scripts')
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', () => {
       const title = document.querySelector('.truncate-' + '@json($product->id)')
       title.innerHTML = truncateWithEllipses(title.innerText, 30)
       initializeSwiper('.swiper-' + '@json($product->id)');

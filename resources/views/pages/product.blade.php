@@ -79,6 +79,16 @@
           </div>
         @endif
       </div>
+      @if ($related_products = $product->related_products)
+        <div class="actual_products">
+          <h2>@lang('common.relatedProducts.title')</h2>
+          <div class="products_list products_list-slider">
+            @foreach ($related_products as $related)
+              @include('include._product', ['product' => $related])
+            @endforeach
+          </div>
+        </div>
+      @endif
       @if ($currentStore->showCart)
         <div class="product_add_btn_wrap">
           @if ($currentStore->startWork)
