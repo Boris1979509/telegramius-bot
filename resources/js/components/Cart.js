@@ -1,5 +1,5 @@
-import LocalStorageDB from '@/js/components/LocalStorageDB'
-import { getSubdomain } from '@/js/utils/getSubdomain'
+import LocalStorageDB from '@/components/LocalStorageDB'
+import { getSubdomain } from '@/utils/getSubdomain'
 
 export class Cart {
     constructor () {
@@ -54,5 +54,11 @@ export class Cart {
     getItemTotalQty (id) {
         const item = this.items.find(item => item.id === id)
         return item ? item.qty : 0
+    }
+    /**
+     * Поиск в корзине по ID
+     */
+    findById (id) {
+        return this.items.some(item => item.id === id)
     }
 }

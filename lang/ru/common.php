@@ -21,7 +21,7 @@ return [
     'addToCart' => 'В корзину',
     'continue' => 'Далее',
     'goToCart' => 'Перейти в корзину',
-    'acceptOrdersFrom' => 'Принимаем заказы с {t}',
+    'acceptOrdersFrom' => 'Принимаем заказы с :t',
     'send' => 'Отправить',
     'save' => 'Сохранить',
     'confirmed' => [

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('slug')
                 ->after('title')
                 ->nullable();
+            $table->index('slug');
         });
     }
 

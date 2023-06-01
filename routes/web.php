@@ -16,8 +16,8 @@ Route::middleware(['store.settings', 'set.language'])->group(function () {
   Route::get('/favorites', FavoritesController::class)->name('favorites');
   Route::get('/cart', CartController::class)->name('cart');
   Route::get('/profile', ProfileController::class)->name('profile');
-  Route::get('/product', ProductController::class)->name('product');
-  Route::get('/product/{slug}', [ProductController::class, 'product'])->name('product');
+  //Route::get('/product', ProductController::class)->name('product');
+  Route::get('/product/{slug}', ProductController::class)->name('product');
 });
 // Create slug
 Route::get('/parse-slug', function () {

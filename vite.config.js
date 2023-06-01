@@ -10,11 +10,11 @@ export default ({ mode }) => {
                 refresh: true
             })
         ],
-        resolve: {
-            alias: {
-                '@': '/resources'
-            }
-        },
+        // resolve: { // default @/
+        //     alias: {
+        //         '@': '/resources'
+        //     }
+        // },
         server: {
             host: process.env.VITE_HOST
         }

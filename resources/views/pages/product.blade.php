@@ -1,82 +1,174 @@
 @extends('layouts.app')
-
+@section('title', $product->title ?? __('common.noData'))
 @section('content')
 
-<div class="page_with_button page_without_search">
-
-    <div class="header">
-        <h1 class="h1_back mb-0">Арт: 123123</h1>
-    </div>
-
-    <div class="product product_page">
+  @if ($product)
+    <div class="page_with_button page_without_search">
+      <div class="header">
+        <h1 class="h1_back mb-0">
+          @if ($product->articul)
+            @lang('vendorСode'): {{ $product->articul }}
+          @else
+            <a class="truncate" href="{{ redirect()->back()->getTargetUrl() }}">{{ $product->title }}</a>
+          @endif
+        </h1>
+      </div>
+      <div class="product product_page">
         <div class="product_images_wrap">
-            <div class="slider_images_wrap">
-                <div class="slider_list">
-                    <div class="slider__item">
-                        <img src="{{ Vite::asset('resources/images/picture-150x150.jpg') }}" alt="" class="slider__item-img">
-                    </div>
-                </div>
-                <div class="slider_dots">
-                    <span class="slider_dots__item" style="width: 20%;"></span>
-                    <span class="slider_dots__item" style="width: 20%;"></span>
-                    <span class="slider_dots__item" style="width: 20%;"></span>
-                    <span class="slider_dots__item" style="width: 20%;"></span>
-                    <span class="slider_dots__item" style="width: 20%;"></span>
-                </div>
+          <div class="slider_images_wrap">
+            <div class="slider_list">
+              <div class="slider__item">
+                <swiper-container class="swiper-{{ $product->id }}" loop="true" init="false">
+                  @foreach ($product->images as $image)
+                    <swiper-slide>
+                      <a href="{{ route('product', ['slug' => $product->slug]) }}">
+                        <img class="slider__item-img"
+                          src="{{ !empty($image->url) ? $image->url : Vite::asset('resources/images/no-image.jpg') }}"
+                          alt="{{ $product->title }}" />
+                      </a>
+                    </swiper-slide>
+                  @endforeach
+                </swiper-container>
+              </div>
             </div>
-
+          </div>
+          @if ($currentStore->showFavorites)
             <div class="product_cart_wrap row">
-                <span class="like "></span>{{--При нажатии добавить класс "like-set" --}}
+              @include('include._favorites')
             </div>
-
+          @endif
         </div>
-
-        <p class="product__title">Салат цезарь с курицей и зерновой горчицей</p>
-
+        <p class="product__title">{{ $product->title }}</p>
         <div class="product_price_like row">
-            <div class="price_wrap">
-                <span class="price">1 250 ₽</span>
-                <span class="price-old">1590 ₽</span>
-            </div>
-            <span class="discount">-50%</span>
+          <div class="price_wrap">
+            <span class="price">{{ $product->price }}</span>
+            @if ($product->new_price)
+              <span class="price-old">{{ $product->new_price }}</span>
+            @endif
+          </div>
+          @if ($product->isDiscount)
+            <span class="discount">-{{ $product->discount_value }} {{ $product->discount_type }}</span>
+          @endif
         </div>
-
-        <div class="product_desc__wrap">
-            <div class="product_desc">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut nisiut quis... elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut nisiut quis... </p>
-            </div>
-            <span class="product_desc__more">Подробнее</span>
-        </div>
-
-        <div class="complain_link row" onclick="support.openСomplaintModal()">
-            <img src="{{ Vite::asset('resources/images/icons/complain.svg') }}" alt="" class="complain_icon">
-            <span class="complain_text">Пожаловаться</span>
-        </div>
-
+        @php
+          $maxLength = 100;
+          $showFullText = strlen($product->description) > $maxLength;
+          function shortenText($text, $maxLength)
+          {
+              if (strlen($text) <= $maxLength) {
+                  return $text;
+              }
+          
+              $shortenedText = substr($text, 0, $maxLength);
+              $lastSpaceIndex = strrpos($shortenedText, ' ');
+          
+              if ($lastSpaceIndex !== false) {
+                  $shortenedText = substr($shortenedText, 0, $lastSpaceIndex);
+              }
+          
+              return $shortenedText . '...';
+          }
+        @endphp
+        @if ($product->description)
+          <div class="product_desc__wrap">
+            <p class="full-text {{ $showFullText ? '' : 'show' }}">{{ $product->description }}</p>
+            <p class="short-text">{{ shortenText($product->description, $maxLength) }}</p>
+            <span class="{{ !$showFullText ? 'hidden' : 'info-link' }}" id="toggle-button">
+              @lang('common.toggleText.show')
+            </span>
+          </div>
+        @endif
+      </div>
+      @if ($currentStore->showCart)
         <div class="product_add_btn_wrap">
-            {{--<span class="product_add__btn">Принимаем заказы с 9:00</span>--}}
-            {{--<span class="product_add__btn">В корзину</span>--}}
-            <a href="" class="product_add__btn product_add__btn-go">Перейти в корзину</a>
+          @if ($currentStore->startWork)
+            <span class="product_add__btn">
+              @lang('common.buttons.acceptOrdersFrom', ['t' => $currentStore->startWork])
+            </span>
+          @else
+            <a href="{{ route('cart') }}" class="product_add__btn product_add__btn-go">
+              @lang('common.buttons.goToCart')
+            </a>
+            <span class="product_add__btn" id="addCart">
+              @lang('common.buttons.addToCart')
+            </span>
+          @endif
         </div>
+      @endif
     </div>
+  @else
+    @component('partials.alert', ['type' => 'info', 'icon' => 'info', 'title' => __('common.information')])
+      @slot('alert_text')
+        @lang('common.noData')
+      @endslot
+    @endcomponent
+  @endif
+  @push('scripts')
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
 
-    <div class="actual_products">
-        <h2>Не забудьте купить</h2>
+        const id = '@json($product->id)'
 
-        <div class="products_list products_list-slider">
+        // Обрезаем title 
+        const title = document.querySelector('.truncate')
+        title.innerHTML = truncateWithEllipses(title.innerText, 30)
+        /***/
 
-            @for ($i = 3; $i > 0; $i--)
+        const btnAdd = document.getElementById('addCart')
+        const btnGo = document.querySelector('.product_add__btn-go')
+        const toggleButton = document.getElementById('toggle-button')
 
-            @include('include._product')
+        if (btnGo) {
+          const nextBlock = btnGo.nextElementSibling
+        }
 
-            @endfor
+        const isProductInCart = () => {
+          if (!btnGo) return
+          if (cart.findById(id)) {
+            btnGo.style.display = 'block'
+            nextBlock.style.display = 'none'
+          } else {
+            btnGo.style.display = 'none'
+            nextBlock.style.display = 'block'
+          }
+        }
 
-        </div>
-    </div>
+        const toggleDescription = () => {
+          const fullText = document.querySelector('.full-text')
+          const shortText = document.querySelector('.short-text')
 
-    @include('include._created_in')
-    @include('include._complaint_modal')
+          if (fullText.classList.contains('show')) {
+            shortText.classList.add('show')
+            fullText.classList.remove('show')
+            toggleButton.innerText = '@lang('common.toggleText.show')'
+          } else {
+            fullText.classList.add('show')
+            shortText.classList.remove('show')
+            toggleButton.innerText = '@lang('common.toggleText.hide')'
+          }
+        }
 
-</div>
+        if (btnAdd) {
+          btnAdd.addEventListener('click', () => {
+            cart.addItem({
+              id,
+              qty: 1
+            })
+            isProductInCart()
+          })
+        }
+
+        if (toggleButton) {
+          toggleButton.addEventListener('click', toggleDescription)
+        }
+
+        initializeSwiper('.swiper-' + id);
+        isProductInCart()
+      })
+    </script>
+  @endpush
+
+  @include('include._created_in')
+  @include('include._complaint_modal')
 
 @endsection

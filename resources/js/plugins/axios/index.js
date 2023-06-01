@@ -1,5 +1,5 @@
 import axios from 'axios'
-import interceptors from './interceptors.js'
+import interceptors from '@/plugins/axios/interceptors.js'
 
 /**
  * Settings opt Axios

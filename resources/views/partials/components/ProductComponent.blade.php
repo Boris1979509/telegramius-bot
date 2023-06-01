@@ -25,7 +25,7 @@
     const currentBlock = document.querySelector('[data-show="' + id + '"]')
     const nextBlock = currentBlock.nextElementSibling;
     if(!+totalInput.value) {
-      currentBlock.style.display = 'none';
+      currentBlock.style.display = 'none'
       nextBlock.style.display = 'flex'
     }
     cart.addItem({ id, qty })

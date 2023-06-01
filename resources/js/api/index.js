@@ -1,4 +1,4 @@
-import axios from '@/js/plugins/axios'
+import axios from '@/plugins/axios'
 
 export default {
     /** Categories */

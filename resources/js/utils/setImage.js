@@ -1,4 +1,4 @@
-import url from '@/images/no-image.jpg'
+import url from '../../images/no-image.jpg'
 
 export const setImage = (images, first = false) => {
     if (!images.length) {

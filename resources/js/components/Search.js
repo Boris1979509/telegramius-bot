@@ -1,7 +1,7 @@
-import { Tabs } from './Tabs'
-import { truncateWithEllipses } from '@/js/utils/truncateWithEllipses'
-import { setImage } from '@/js/utils/setImage'
-import noImageUrl from '@/images/no-image.jpg'
+import { Tabs } from '@/components/Tabs'
+import { truncateWithEllipses } from '@/utils/truncateWithEllipses'
+import { setImage } from '@/utils/setImage'
+import noImageUrl from '../../images/no-image.jpg'
 
 class Search {
     constructor () {
@@ -49,8 +49,7 @@ class Search {
                 categories.forEach(item => {
                     this.categoriesResultHtml += `
                                   <a href="${
-                                      '/catalog/' +
-                                      item.slug
+                                      '/catalog/' + item.slug
                                   }" class="category ${
                         numCategoriesInRow === 1 ? 'item-one' : ''
                     }">
@@ -90,8 +89,7 @@ class Search {
                             this.productsResultHtml += `
                                                     <swiper-slide>
                                                     <a href="${
-                                                        '/product/' +
-                                                        item.slug
+                                                        '/product/' + item.slug
                                                     }">
                                                     <img
                                                         class="slider__item-img"

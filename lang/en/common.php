@@ -21,7 +21,7 @@ return [
     'addToCart' => 'Add to cart',
     'continue' => 'Continue',
     'goToCart' => 'Go to cart',
-    'acceptOrdersFrom' => 'We accept orders from {t}',
+    'acceptOrdersFrom' => 'We accept orders from :t',
     'send' => 'Send',
     'save' => 'Save',
     'confirmed' => [

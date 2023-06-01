@@ -5,42 +5,42 @@
         <div class="slider__item">
           <swiper-container class="swiper-{{ $product->id }}" loop="true" init="false">
             @foreach ($product->images as $image)
-            <swiper-slide>
-              <a href="{{ route('product', ['slug' => $product->slug]) }}">
-                <img
-                  class="slider__item-img"
-                  src="{{ !empty($image->url) ? $image->url : Vite::asset('resources/images/no-image.jpg') }}"
-                  alt="{{ $product->title }}"
-                />
-              </a>
-            </swiper-slide>
+              <swiper-slide>
+                <a href="{{ route('product', ['slug' => $product->slug]) }}">
+                  <img class="slider__item-img"
+                    src="{{ !empty($image->url) ? $image->url : Vite::asset('resources/images/no-image.jpg') }}"
+                    alt="{{ $product->title }}" />
+                </a>
+              </swiper-slide>
             @endforeach
           </swiper-container>
         </div>
       </div>
     </div>
-      <div class="product_cart_wrap row">
-        @if($product->isDiscount)
-          <span class="discount">-{{ $product->discount_value }} {{ $product->discount_type }}</span>
-        @endif
-        @if($currentStore->showCart)
-          <div v-if="showCart" class="product_add_wrap">
-              @include('partials.counter')
-          </div>
-        @endif
-      </div>
+    <div class="product_cart_wrap row">
+      @if ($product->isDiscount)
+        <span class="discount">-{{ $product->discount_value }} {{ $product->discount_type }}</span>
+      @endif
+      @if ($currentStore->showCart)
+        <div class="product_add_wrap">
+          @include('partials.counter')
+        </div>
+      @endif
+    </div>
   </div>
   <p class="product__title truncate-{{ $product->id }}">
-      {{ $product->title }}
+    {{ $product->title }}
   </p>
   <div class="product_price_like row">
     <div class="price_wrap">
       <span class="price">{{ $product->price }}</span>
-        @if($product->new_price)
-          <span class="price-old">{{ $product->new_price }}</span>
-        @endif
+      @if ($product->new_price)
+        <span class="price-old">{{ $product->new_price }}</span>
+      @endif
     </div>
-    @include('include._favorites')
+    @if ($currentStore->showFavorites)
+      @include('include._favorites')
+    @endif
   </div>
 </div>
 @push('scripts')

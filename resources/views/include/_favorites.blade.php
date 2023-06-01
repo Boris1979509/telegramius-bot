@@ -1,8 +1,4 @@
-<span
-    id="like-{{ $product->id }}"
-    class="like"
-    onclick="toggleLike('{{ $product->id }}')"
-></span>
+<span id="like-{{ $product->id }}" class="like" onclick="toggleLike('{{ $product->id }}')"></span>
 
 @push('scripts')
   <script>
@@ -11,10 +7,11 @@
       likeButton.classList.toggle('like-set')
       favorites.toggleFavorite(id)
     }
-    document.addEventListener('DOMContentLoaded', () => {      
+    document.addEventListener('DOMContentLoaded', () => {
       favorites.items.forEach(item => {
         const likeButton = document.getElementById('like-' + item)
-        likeButton.classList.add('like-set')
+        if (likeButton)
+          likeButton.classList.add('like-set')
       })
     })
   </script>

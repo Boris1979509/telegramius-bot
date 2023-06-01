@@ -21,7 +21,7 @@ return [
     'addToCart' => 'Sepete ekle',
     'continue' => 'Daha öte',
     'goToCart' => 'Çöp kutusuna git',
-    'acceptOrdersFrom' => '{t}\'dan itibaren siparişleri kabul ediyoruz',
+    'acceptOrdersFrom' => ':t\'dan itibaren siparişleri kabul ediyoruz',
     'send' => 'Göndermek',
     'save' => 'Kaydetmek',
     'confirmed' => [

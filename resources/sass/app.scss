@@ -446,6 +446,12 @@
     border-bottom: 1px solid #F1F3F5;
     margin-bottom: 10px;
     padding-bottom: 10px;
+    .full-text {
+        display: none;
+        &.show {
+            display: block;
+        }
+    }
 }
 .product_desc {
     // height: 90px;

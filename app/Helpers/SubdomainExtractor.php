@@ -8,8 +8,9 @@ class SubdomainExtractor
   {
     $host = parse_url($url, PHP_URL_HOST);
     $hostParts = explode('.', $host);
-    $subdomain = array_shift($hostParts);
+    // Извлечение первого поддомена
+    $firstSubdomain = $hostParts[0];
 
-    return $subdomain;
+    return $firstSubdomain;
   }
 }

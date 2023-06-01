@@ -1,5 +1,5 @@
-import LocalStorageDB from '@/js/components/LocalStorageDB'
-import { getSubdomain } from '@/js/utils/getSubdomain'
+import LocalStorageDB from '@/components/LocalStorageDB'
+import { getSubdomain } from '@/utils/getSubdomain'
 
 export class Favorites {
     constructor () {

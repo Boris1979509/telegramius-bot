@@ -7,18 +7,18 @@ export const getSubdomain = () => {
         return ''
     }
 
-    const parts = hostname.split('.')
+    // Удаляем "http://" или "https://" из начала строки
+    const cleanedHostname = hostname.replace(/^https?:\/\//i, '')
+
+    // Разбиваем строку на части, используя точку в качестве разделителя
+    const parts = cleanedHostname.split('.')
 
     // Проверяем, есть ли поддомен
     if (parts.length > 2) {
-        // Получаем все части, кроме последних двух (основной домен и верхнеуровневый домен)
-        const subdomainParts = parts.slice(0, -2)
+        // Получаем первую часть после "https://" или "http://"
+        const subdomain = parts[0]
 
-        // Объединяем части поддомена с помощью точки в качестве разделителя
-        const name = subdomainParts.join('.')
-
-        // Удаляем "http://" или "https://" из имени поддомена
-        return name.replace(/^https?:\/\//i, '')
+        return subdomain
     }
 
     // Поддомен не найден
