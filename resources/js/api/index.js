@@ -42,9 +42,9 @@ export default {
     //     return await axios.post('/api/remove-buyer-address', params)
     // },
     /** Create buyer complaint */
-    // async createBuyerComplaint (params) {
-    //     return await axios.post('/api/create-buyer-complaint', params)
-    // },
+    async createBuyerComplaint (params) {
+        return await axios.post('/api/create-buyer-complaint', params)
+    },
     /** User data  */
     // async getUserData (params) {
     //     return await axios.post('/api/buyer/info', params)

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\ComplaintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ use App\Http\Controllers\API\ProductController;
 
 Route::post('/categories-search', [CategoryController::class, 'search']);
 Route::post('/products-search', [ProductController::class, 'search']);
+Route::post('/create-buyer-complaint', [ComplaintController::class, 'create']);

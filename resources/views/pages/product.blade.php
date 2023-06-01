@@ -69,16 +69,16 @@
               return $shortenedText . '...';
           }
         @endphp
-        @if ($product->description)
-          <div class="product_desc__wrap">
+        <div class="product_desc__wrap">
+          @if ($product->description)
             <p class="full-text {{ $showFullText ? '' : 'show' }}">{{ $product->description }}</p>
             <p class="short-text {{ $showFullText ? 'show' : '' }}">{{ shortenText($product->description, $maxLength) }}
             </p>
             <span class="{{ !$showFullText ? 'hidden' : 'info-link' }}" id="toggle-button">
               @lang('common.toggleText.show')
             </span>
-          </div>
-        @endif
+          @endif
+        </div>
       </div>
       @if ($related_products = $product->related_products)
         <div class="actual_products">
@@ -90,6 +90,10 @@
           </div>
         </div>
       @endif
+      <div class="complain_link row" onclick="toggleShow('complaint_modal_wrap')">
+        <img src="{{ Vite::asset('resources/images/icons/complain.svg') }}" alt="" class="complain_icon" />
+        <span class="complain_text">@lang('common.complain.title')</span>
+      </div>
       @if ($currentStore->showCart)
         <div class="product_add_btn_wrap">
           @if ($currentStore->startWork)
@@ -181,5 +185,6 @@
 
   @include('include._created_in')
   @include('include._complaint_modal')
+  @include('include._final_modal', ['message' => __('common.complain.message')])
 
 @endsection
