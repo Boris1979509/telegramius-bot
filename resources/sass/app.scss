@@ -320,14 +320,17 @@
     position: relative;
 }
 .circle-red {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: block;
-    width: 10px;
-    height: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  &.active {
     background: #DC331D;
-    border-radius: 50%;
+  }
 }
 
 .created_in_wrap {

@@ -104,7 +104,11 @@ export default {
     /** Component */
     async getSearchCategories (params) {
         return await axios.post('/api/categories-search', params)
-    }
+    },
+    /** Favorites */
+    async toggleFavorite (params) {
+        return await axios.post('/favorite/toggle', params)
+    },
     /** Category-products */
     // async getProductsForCategory(params) {
     //     return await axios.post('/api/category/products', params)

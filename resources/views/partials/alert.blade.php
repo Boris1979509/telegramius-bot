@@ -6,7 +6,7 @@
     <div class="alert_message">
       <div class="alert_title fw-600">{{ $title }}</div>
       <div class="alert_text">
-        @yield('alert_text')
+        {{ $message }}
       </div>
     </div>
   </div>

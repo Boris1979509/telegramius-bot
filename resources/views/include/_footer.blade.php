@@ -21,6 +21,7 @@
       <a href="{{ route('favorites') }}" class="bottom_links__item">
         <img src="{{ Vite::asset('resources/images/icons/footer/heart.svg') }}" alt=""
           class="bottom_links__icon">
+        <span class="favorites circle-red @if (!empty(session('favorites'))) active @endif"></span>
       </a>
     @endif
     @if ($currentStore->showCart == 1)

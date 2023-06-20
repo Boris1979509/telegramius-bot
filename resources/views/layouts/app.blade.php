@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
   <title>@yield('title')</title>
-  <meta name="description" content="Бот">
+  <meta name="description" content="@yield('description')">
 
   <script src="https://yookassa.ru/checkout-widget/v1/checkout-widget.js"></script>
   <script src="https://securepay.tinkoff.ru/html/payForm/js/tinkoff_v2.js"></script>
@@ -30,6 +30,7 @@
     @include('include._preloader')
     @yield('modal')
   </div>
+  @include('include._created_in')
   @stack('scripts')
 </body>
 

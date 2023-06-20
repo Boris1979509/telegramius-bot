@@ -5,9 +5,9 @@ export default function (axios) {
         function (config) {
             //const locale = Trans.guessDefaultLocale()
             //config.params = { lang: locale, ...config.params }
-            // config.headers['X-CSRF-TOKEN'] = document
-            //     .querySelector('meta[name="csrf-token"]')
-            //     .getAttribute('content')
+            config.headers['X-CSRF-TOKEN'] = document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute('content')
             return config
         },
         function (error) {

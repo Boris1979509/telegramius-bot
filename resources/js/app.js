@@ -5,13 +5,13 @@ import { toggleShow } from '@/utils/toggle'
 import { initializeSwiper } from '@/utils/initializeSwiper'
 import { Preloader } from '@/components/Preloader'
 import { Cart } from '@/components/Cart'
-import { Favorites } from '@/components/Favorites'
+import { toggleLike } from '@/utils/toggleLike'
 
 // Добавляем функции в глобальный контекст
 window.cart = new Cart()
-window.favorites = new Favorites()
 window.truncateWithEllipses = truncateWithEllipses
 window.toggleShow = toggleShow
+window.toggleLike = toggleLike
 window.api = api
 window.initializeSwiper = initializeSwiper
 window.preloader = new Preloader('.loader_container')

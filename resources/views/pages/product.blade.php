@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('title', $product->title ?? __('common.noData'))
-@section('content')
+@section('description', '')
 
+@section('content')
   @if ($product)
     <div class="page_with_button page_without_search">
       <div class="header">
@@ -112,79 +113,75 @@
       @endif
     </div>
   @else
-    @component('partials.alert', ['type' => 'info', 'icon' => 'info', 'title' => __('common.information')])
-      @slot('alert_text')
-        @lang('common.noData')
-      @endslot
-    @endcomponent
-  @endif
-  @push('scripts')
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
+    @component('partials.alert', [
+        'type' => 'info',
+        'icon' => 'info',
+        'title' => __('common.information'),
+        'message' => __('common.noData'),
+    ])
+    @endif
+    @push('scripts')
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
 
-        const id = '@json($product->id)'
+          const id = '@json($product->id)'
 
-        // Обрезаем title 
-        const title = document.querySelector('.truncate')
-        title.innerHTML = truncateWithEllipses(title.innerText, 30)
-        /***/
+          // Обрезаем title 
+          const title = document.querySelector('.truncate')
+          title.innerHTML = truncateWithEllipses(title.innerText, 30)
+          /***/
 
-        const btnAdd = document.getElementById('addCart')
-        const btnGo = document.querySelector('.product_add__btn-go')
-        const toggleButton = document.getElementById('toggle-button')
+          const btnAdd = document.getElementById('addCart')
+          const btnGo = document.querySelector('.product_add__btn-go')
+          const toggleButton = document.getElementById('toggle-button')
 
-        if (btnGo) {
-          const nextBlock = btnGo.nextElementSibling
-        }
-
-        const isProductInCart = () => {
-          if (!btnGo) return
-          if (cart.findById(id)) {
-            btnGo.style.display = 'block'
-            nextBlock.style.display = 'none'
-          } else {
-            btnGo.style.display = 'none'
-            nextBlock.style.display = 'block'
+          const isProductInCart = () => {
+            if (!btnGo) return
+            if (cart.findById(id)) {
+              btnGo.style.display = 'block'
+              btnGo.nextElementSibling.style.display = 'none'
+            } else {
+              btnGo.style.display = 'none'
+              btnGo.nextElementSibling.style.display = 'block'
+            }
           }
-        }
 
-        const toggleDescription = () => {
-          const fullText = document.querySelector('.full-text')
-          const shortText = document.querySelector('.short-text')
+          const toggleDescription = () => {
+            const fullText = document.querySelector('.full-text')
+            const shortText = document.querySelector('.short-text')
 
-          if (fullText.classList.contains('show')) {
-            shortText.classList.add('show')
-            fullText.classList.remove('show')
-            toggleButton.innerText = '@lang('common.toggleText.show')'
-          } else {
-            fullText.classList.add('show')
-            shortText.classList.remove('show')
-            toggleButton.innerText = '@lang('common.toggleText.hide')'
+            if (fullText.classList.contains('show')) {
+              shortText.classList.add('show')
+              fullText.classList.remove('show')
+              toggleButton.innerText = '@lang('common.toggleText.show')'
+            } else {
+              fullText.classList.add('show')
+              shortText.classList.remove('show')
+              toggleButton.innerText = '@lang('common.toggleText.hide')'
+            }
           }
-        }
 
-        if (btnAdd) {
-          btnAdd.addEventListener('click', () => {
-            cart.addItem({
-              id,
-              qty: 1
+          if (btnAdd) {
+            btnAdd.addEventListener('click', () => {
+              cart.addItem({
+                id,
+                qty: 1
+              })
+              isProductInCart()
             })
-            isProductInCart()
-          })
-        }
+          }
 
-        if (toggleButton) {
-          toggleButton.addEventListener('click', toggleDescription)
-        }
+          if (toggleButton) {
+            toggleButton.addEventListener('click', toggleDescription)
+          }
 
-        initializeSwiper('.swiper-' + id);
-        isProductInCart()
-      })
-    </script>
-  @endpush
+          initializeSwiper('.swiper-' + id);
+          isProductInCart()
+        })
+      </script>
+    @endpush
 
-  @include('include._created_in')
-  @include('include._complaint_modal')
-  @include('include._final_modal', ['message' => __('common.complain.message')])
+    @include('include._complaint_modal')
+    @include('include._final_modal', ['message' => __('common.complain.message')])
 
-@endsection
+  @endsection
