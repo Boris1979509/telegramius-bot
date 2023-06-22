@@ -1,64 +1,47 @@
-import LocalStorageDB from '@/components/LocalStorageDB'
-import { getSubdomain } from '@/utils/getSubdomain'
-
 export class Cart {
-    constructor () {
-        this.subdomain = getSubdomain() || 'test'
-        this.db = new LocalStorageDB('cart=')
-        this.items = this.loadItemsFromLocalStorage()
-    }
+    addItem (id) {
+        const qty = 1
+        const totalInput = document.getElementById('item-total-qty-' + id)
+        const currentBlock = this.findBlock(id)
+        const nextBlock = currentBlock?.nextElementSibling
 
-    addItem (item) {
-        const { id, qty } = item
-        const existingItem = this.items.find(item => item.id === id)
-
-        if (existingItem) {
-            existingItem.qty += qty
-        } else {
-            this.items.push({ id, qty })
+        if (totalInput && !+totalInput.value) {
+            currentBlock.classList.add('hidden')
+            nextBlock.classList.remove('hidden')
         }
-        this.saveItemsToLocalStorage()
+
+        api.addToCart({ id, qty })
+            .then(() => {
+                if(totalInput) totalInput.value++
+            })
+            .catch(error => {
+                console.error('Error when executing AJAX request:', error)
+            })
     }
 
     removeItem (id) {
-        const itemIndex = this.items.findIndex(item => item.id === id)
+        const totalInput = document.getElementById('item-total-qty-' + id)
 
-        if (itemIndex !== -1) {
-            const currentItem = this.items[itemIndex]
+        api.removeFromCart({ id })
+            .then(() => {
+                if (+totalInput.value > 1) {
+                    totalInput.value--
+                }
+            })
+            .catch(error => {
+                console.error('Error when executing AJAX request:', error)
+            })
 
-            if (currentItem.qty > 1) {
-                currentItem.qty--
-            } else {
-                this.items.splice(itemIndex, 1)
-            }
+        if (+totalInput.value === 1) {
+            totalInput.value = ''
+            const currentBlock = this.findBlock(id)
+            const nextBlock = currentBlock.nextElementSibling
+            currentBlock.classList.remove('hidden')
+            nextBlock.classList.add('hidden')
         }
-        this.saveItemsToLocalStorage()
     }
 
-    saveItemsToLocalStorage () {
-        this.db.save(this.subdomain, this.items)
-    }
-
-    loadItemsFromLocalStorage () {
-        return this.db.fetch(this.subdomain) || []
-    }
-    /**
-     * Получаем общее кол-во товаров
-     */
-    getTotalQuantity () {
-        return this.items.reduce((totalQty, item) => totalQty + item.qty, 0)
-    }
-    /**
-     * Получаем общее кол-во у определённого товара
-     */
-    getItemTotalQty (id) {
-        const item = this.items.find(item => item.id === id)
-        return item ? item.qty : 0
-    }
-    /**
-     * Поиск в корзине по ID
-     */
-    findById (id) {
-        return this.items.some(item => item.id === id)
+    findBlock (id) {
+        return document.querySelector('[data-show="' + id + '"]')
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Services\SlugParserService;
+use App\Http\Controllers\OrderController;
 
 Route::middleware(['store.settings', 'set.language'])->group(function () {
 
@@ -19,12 +20,20 @@ Route::middleware(['store.settings', 'set.language'])->group(function () {
   Route::get('/favorites', FavoritesController::class)->name('favorites');
   Route::post('/favorite/toggle', [FavoritesController::class, 'toggle']);
 
-  Route::get('/cart', CartController::class)->name('cart');
-
   Route::get('/profile', ProfileController::class)->name('profile');
 
   //Route::get('/product', ProductController::class)->name('product');
   Route::get('/product/{slug}', ProductController::class)->name('product');
+
+  // Cart
+  Route::get('/cart', CartController::class)->name('cart');
+  Route::post('/cart/add', [CartController::class, 'addItem']);
+  Route::post('/cart/remove', [CartController::class, 'removeItem']);
+  Route::get('/get-cart', [CartController::class, 'getCart']);
+  Route::post('/cart/remove-by-id', [CartController::class, 'removeItemById']);
+
+  // Order
+  Route::get('/order', OrderController::class)->name('order');
 });
 // Create slug
 Route::get('/parse-slug', function () {

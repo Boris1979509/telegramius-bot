@@ -1,21 +1,28 @@
 <div class="cart_product">
-    <div class="cart_product_top">
-        <img src="{{ Vite::asset('resources/images/picture-150x150.jpg') }}" alt="" class="cart_product-img">
-        <div class="cart_product__info">
-            <p class="cart_product_title">Пицца с сыром, салями и ветчиной, каперсами и зеленым луком и перце...</p>
-            <span class="cart_product__article"><span class="article-title">Артикул:</span> 123456</span>
-            <div class="product_change_count__wrap row">
-                <img src="{{ Vite::asset('resources/images/icons/minus-icon.svg') }}" alt="" class="product_change_count__icon product_change_count__icon-minus">
-                <input type="text" class="product_change_count__value" value="3">
-                <img src="{{ Vite::asset('resources/images/icons/plus-icon.svg') }}" alt="" class="product_change_count__icon product_change_count__icon-plus">
-            </div>
-        </div>
+  <div class="cart_product_top">
+    <img src="{{ empty($product->images) ? Vite::asset('resources/images/no-image.jpg') : $product->images[0]->url }}"
+      alt="" class="cart_product-img">
+    <div class="cart_product__info">
+      <p class="cart_product_title">{{ $product->title }}</p>
+      @if ($product->articul)
+        <span class="cart_product__article">
+          <span class="article-title">@lang('common.vendorСode'):</span> {{ $product->articul }}
+        </span>
+      @endif
+      @include('partials.counter')
     </div>
-    <div class="product_price row">
-        <div class="price_wrap">
-            <span class="price">1 250 ₽</span>
-            <span class="price-old">1590 ₽</span>
-        </div>
-        <img src="{{ Vite::asset('resources/images/icons/remove-icon.svg') }}" alt="" class="remove-icon">
+  </div>
+  <div class="product_price row">
+    <div class="price_wrap">
+      <span class="price">{{ $product->price }}</span>
+      @if ($product->new_price)
+        <span class="price-old">{{ $product->new_price }}</span>
+      @endif
     </div>
+    @if ($product->isDiscount)
+      <span class="discount">-{{ $product->discount_value }} {{ $product->discount_type }}</span>
+    @endif
+    <img src="{{ Vite::asset('resources/images/icons/remove-icon.svg') }}" alt="" class="remove-icon"
+      onclick="removeItemById({{ $product->id }})">
+  </div>
 </div>

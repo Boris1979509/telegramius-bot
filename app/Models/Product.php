@@ -117,4 +117,18 @@ class Product extends Model
 
         return Schema::hasColumn($tableName, $fieldName);
     }
+    /**
+     * Получить товары по идентификаторам.
+     *
+     * @param array $ids Массив идентификаторов товаров.
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getProductsByIds(array $ids)
+    {
+        return self::whereIn('id', $ids)
+            ->with(['images' => function ($query) {
+                $query->orderBy('rank');
+            }])
+            ->get();
+    }
 }

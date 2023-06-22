@@ -95,10 +95,10 @@ return [
     'cartInfo' => [
       'delivery' => 'Teslimat',
       'freeShipping' => 'Ücretsiz kargo',
-      'numberOfGoods' => '[total] ürün değerinde=>',
+      'numberOfGoods' => ':total ürün değerinde:',
       'freeShippingFrom' => 'Dan siparişlerde ücretsiz kargo '
     ],
-    'workMode' => 'Çalışma modu=>',
+    'workMode' => 'Çalışma modu:',
     'aroundClock' => 'Saat',
     'openPay' => [
       'error' => [

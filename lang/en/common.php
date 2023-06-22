@@ -94,10 +94,10 @@ return [
     'cartInfo' => [
       'delivery' => 'Delivery',
       'freeShipping' => 'Free shipping',
-      'numberOfGoods' => '{total} items totaling:',
+      'numberOfGoods' => ':total items totaling:',
       'freeShippingFrom' => 'Free shipping when ordering from '
     ],
-    'workMode' => 'Work mode=>',
+    'workMode' => 'Work mode:',
     'aroundClock' => 'Around the clock',
     'openPay' => [
       'error' => [

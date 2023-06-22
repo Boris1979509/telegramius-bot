@@ -102,10 +102,11 @@
               @lang('common.buttons.acceptOrdersFrom', ['t' => $currentStore->startWork])
             </span>
           @else
-            <a href="{{ route('cart') }}" class="product_add__btn product_add__btn-go">
+            <a href="{{ route('cart') }}"
+              class="product_add__btn product_add__btn-go {{ !$isProductInCart ? 'hidden' : '' }}">
               @lang('common.buttons.goToCart')
             </a>
-            <span class="product_add__btn" id="addCart">
+            <span class="product_add__btn {{ $isProductInCart ? 'hidden' : '' }}" id="addCart">
               @lang('common.buttons.addToCart')
             </span>
           @endif
@@ -120,68 +121,52 @@
         'message' => __('common.noData'),
     ])
     @endif
-    @push('scripts')
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-          const id = '@json($product->id)'
-
-          // Обрезаем title 
-          const title = document.querySelector('.truncate')
-          title.innerHTML = truncateWithEllipses(title.innerText, 30)
-          /***/
-
-          const btnAdd = document.getElementById('addCart')
-          const btnGo = document.querySelector('.product_add__btn-go')
-          const toggleButton = document.getElementById('toggle-button')
-
-          const isProductInCart = () => {
-            if (!btnGo) return
-            if (cart.findById(id)) {
-              btnGo.style.display = 'block'
-              btnGo.nextElementSibling.style.display = 'none'
-            } else {
-              btnGo.style.display = 'none'
-              btnGo.nextElementSibling.style.display = 'block'
-            }
-          }
-
-          const toggleDescription = () => {
-            const fullText = document.querySelector('.full-text')
-            const shortText = document.querySelector('.short-text')
-
-            if (fullText.classList.contains('show')) {
-              shortText.classList.add('show')
-              fullText.classList.remove('show')
-              toggleButton.innerText = '@lang('common.toggleText.show')'
-            } else {
-              fullText.classList.add('show')
-              shortText.classList.remove('show')
-              toggleButton.innerText = '@lang('common.toggleText.hide')'
-            }
-          }
-
-          if (btnAdd) {
-            btnAdd.addEventListener('click', () => {
-              cart.addItem({
-                id,
-                qty: 1
-              })
-              isProductInCart()
-            })
-          }
-
-          if (toggleButton) {
-            toggleButton.addEventListener('click', toggleDescription)
-          }
-
-          initializeSwiper('.swiper-' + id);
-          isProductInCart()
-        })
-      </script>
-    @endpush
 
     @include('include._complaint_modal')
     @include('include._final_modal', ['message' => __('common.complain.message')])
 
   @endsection
+  @push('scripts')
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+
+        const id = '@json($product->id)'
+
+        // Обрезаем title
+        const title = document.querySelector('.truncate')
+        title.innerHTML = truncateWithEllipses(title.innerText, 30)
+        /***/
+
+        const btnAdd = document.getElementById('addCart')
+        const btnGo = document.querySelector('.product_add__btn-go')
+        const toggleButton = document.getElementById('toggle-button')
+
+        const toggleDescription = () => {
+          const fullText = document.querySelector('.full-text')
+          const shortText = document.querySelector('.short-text')
+
+          if (fullText.classList.contains('show')) {
+            shortText.classList.add('show')
+            fullText.classList.remove('show')
+            toggleButton.innerText = '@lang('common.toggleText.show')'
+          } else {
+            fullText.classList.add('show')
+            shortText.classList.remove('show')
+            toggleButton.innerText = '@lang('common.toggleText.hide')'
+          }
+        }
+
+        btnAdd.addEventListener('click', () => {
+          cart.addItem(id)
+          btnAdd.classList.add('hidden')
+          btnGo.classList.remove('hidden')
+        })
+
+        if (toggleButton) {
+          toggleButton.addEventListener('click', toggleDescription)
+        }
+
+        initializeSwiper('.swiper-' + id);
+      })
+    </script>
+  @endpush

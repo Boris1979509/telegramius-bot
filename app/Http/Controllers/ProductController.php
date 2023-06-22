@@ -16,6 +16,7 @@ class ProductController extends BaseController
                 $query->orderBy('rank');
             }])
             ->first();
+        $isProductInCart = $this->cartService->findItem($product->id);
 
         if ($product->arr_related) {
             $related = explode(',', $product->arr_related);
@@ -23,6 +24,6 @@ class ProductController extends BaseController
             $product->related_products = $related_products;
         }
 
-        return view('pages.product', compact('currentStore', 'product'));
+        return view('pages.product', compact('currentStore', 'product', 'isProductInCart'));
     }
 }

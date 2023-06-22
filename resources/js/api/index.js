@@ -98,7 +98,7 @@ export default {
     //     return await axios.post('/api/component', params)
     // },
     /** Component */
-    async getSearchProducts(params) {
+    async getSearchProducts (params) {
         return await axios.post('/api/products-search', params)
     },
     /** Component */
@@ -108,6 +108,19 @@ export default {
     /** Favorites */
     async toggleFavorite (params) {
         return await axios.post('/favorite/toggle', params)
+    },
+    /** Cart */
+    async addToCart (params) {
+        return await axios.post('/cart/add', params)
+    },
+    async removeFromCart (params) {
+        return await axios.post('/cart/remove', params)
+    },
+    async getCart () {
+        return await axios.get('/get-cart')
+    },
+    async removeItemById (params) {
+        return await axios.post('/cart/remove-by-id', params)
     },
     /** Category-products */
     // async getProductsForCategory(params) {

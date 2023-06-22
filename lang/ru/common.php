@@ -96,10 +96,10 @@ return [
     'cartInfo' => [
       'delivery' => 'Доставка',
       'freeShipping' => 'Бесплатная доставка',
-      'numberOfGoods' => '{total} шт. на сумму:',
+      'numberOfGoods' => ':total шт. на сумму:',
       'freeShippingFrom' => 'Бесплатная доставка при заказе от '
     ],
-    'workMode' => 'Режим работы=>',
+    'workMode' => 'Режим работы:',
     'aroundClock' => 'Круглосуточно',
     'openPay' => [
       'error' => [
